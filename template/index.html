@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Stroke Prediction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="static/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="mycard">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="myleftctn">
+
+            <form class="myform text-center" method="post" action="/predict" accept-charset="utf-8">
+              <header>Check If Your Heart Is Safe</header>
+              
+              <div class="form-group ">
+                <label style="color: gray;">Select Your Gender</label>
+                <select class="myinput" id="Gender" name="Gender" required>
+                  <option disabled="disabled" selected="selected">~Select~</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Others">Others</option>
+              </select>
+              </div>
+              <div class="form-group">
+                <input class="myinput" type="text" name='Age' placeholder="Enter Your age" id="Age" required>
+              </div>
+              <div class="form-group ">
+                <label style="color: gray;">Do You Have Hypertension?</label>
+                <select class="myinput" id="Hypertension" name="Hypertension" required>
+                  <option disabled="disabled" selected="selected">~Select~</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+              </select>
+              </div>
+              <div class="form-group ">
+                <label style="color: gray;">Do You Have Prior Heart Diseases</label>
+                <select class="myinput" id="Heartdisease" name="Heartdisease" required>
+                  <option disabled="disabled" selected="selected">~Select~</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label style="color: gray;">Are You Married?</label>
+                <select class="myinput" id="Married" name="Married" required>
+                  <option disabled="disabled" selected="selected">~Select~</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+              </select>
+              </div>
+              <div class="form-group ">
+                <label style="color: gray;">What Is Your Work Type?</label>
+                <select class="myinput" id="Work" name="Work" required>
+                  <option disabled="disabled" selected="selected">~Select~</option>
+                  <option value="Private">Private</option>
+                  <option value="Self-employed">Self-employed</option>
+                  <option value="Govt_job">Govt_job</option>
+                  <option value="children">children</option>
+                  <option value="Never_worked">Never_worked</option>
+              </select>
+              </div>
+              <div class="form-group ">
+                <label style="color: gray;">What Is Your Residence Type?</label>
+                <select class="myinput" id="Residence" name="Residence" required>
+                  <option disabled="disabled" selected="selected">~Select~</option>
+                  <option value="Rural">Rural</option>
+                  <option value="Urban">Urban</option>
+              </select>
+              </div>
+              <div class="form-group">
+                <input class="myinput" name="Glucose" type="text" placeholder="Enter your glucose level" id="Glucose" required>
+              </div>
+              <div class="form-group">
+                <input class="myinput" name='Bmi' type="text" placeholder="Enter your BMI" id="Bmi" required>
+              </div>
+              <div class="form-group ">
+                <label style="color: gray;">What is your smoking status?</label>
+                <select class="myinput" id="Smoking" name="Smoking" required>
+                  <option disabled="disabled" selected="selected">~Select~</option>
+                  <option value="Unknown">Unknown</option>
+                  <option value="foremerly smoked">foremerly smoked</option>
+                  <option value="Never smoked">Never smoked</option>
+                  <option value="smokes">smokes</option>
+              </select>
+              </div>
+              <input type="submit" class="butt" value="Check Your Results">
+              <h3 style="font-size: medium;">{{prediction_text}}</h3>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="myrightctn">
+            <div class="box">
+              <header>Check Your Results Here. </header>
+
+              <h3 style="font-size: Large; color:white">{{prediction_text}}</h3>
+
+              <br />
+              <br />
+              <br />
+
+              <p style="font-size: medium; color: white">Want to know more about me? Click here!</p>
+              <br />
+              <p style="font-size: medium; color: white">Github</p><a href="https://github.com/AartiM20/"><input type="button" class="butt-out" value="Github"/></a><br />
+              <p style="font-size: medium; color: white">LinkedIn</p><a href="https://www.linkedin.com/in/arti-mishra-4334b718b"><input type="button" class="butt-out" value="Linkdin"/></a><br />
+              <p style="font-size: medium; color: white">Instagram</p><a href="https://www.instagram.com/aarti._.mishra/"><input type="button" class="butt-out" value="Instagram"/></a><br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script>
+      function form_handler(event)
+      {
+        event.preventDefault();
+      }
+      function send_data()
+      {
+        document.querySelector('form').addEventListener('submit', form_handler);
+  
+        var fd = new FormData(document.querySelector('form'));
+  
+        var xhr = new XMLHttpRequest();
+  
+        xhr.open('POST', '/predict', true);
+        document.getElementById("prediction").innerHTML="Wait! Predicting You approximate Price...";
+  
+        xhr.onreadystatechange= function()
+        {
+          if(xhr.readyState == XMLHttpRequest.DONE)
+          {
+            document.getElementById("prediction").innerHTML="The Price Of Your Laptop Based On your Specification is: €"+ xhr.responseText
+          }
+        }
+  
+        xhr.onload = function(){};
+        xhr.send(fd);
+      }
+  
+    </script> -->
+</body>   
+</html>
