@@ -1,7 +1,7 @@
 # Stroke Prediction
 
 
-Stroke Prediction is a web application where the user has to answer few questions and based on that, prediction will be made whether he/she might have a chance of stroke or not. The dataset that has been used for this project has been taken from Kaggle. This project is based on classification analysis and Logistic Regression model has been used for predicting the best accurate prices of laptop. This project stands with an accuracy score of 95 which is better than any other classification model scores.
+Stroke Prediction is a web application where the user has to answer few questions and based on that, prediction will be made whether he/she might have a chance of stroke or not. The dataset that has been used for this project has been taken from Kaggle. This project is based on classification analysis and Logistic Regression model has been used for predicting the best accurate for chances of stroke. This project stands with an accuracy score of 95 which is better than any other classification model scores.
 
 
 # Screenshot of App
